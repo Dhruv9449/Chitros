@@ -1,0 +1,9 @@
+# Folders
+__pycache__
+venv/
+test
+
+# Files
+posts/*
+profile_pictures/*
+.env
