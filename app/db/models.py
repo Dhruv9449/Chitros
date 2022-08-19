@@ -1,8 +1,10 @@
 """ Module defining all database models"""
 
 # Imports
-from sqlalchemy import TIMESTAMP, Column, ForeignKey, Integer, String, Boolean, Table, text
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy import (TIMESTAMP, Column, ForeignKey,
+                        Integer, String, Boolean, Table,
+                        select, text, func)
+from sqlalchemy.orm import relationship, backref, column_property
 
 from app.db.db_setup import Base
 
@@ -123,3 +125,9 @@ class Like(Base):
         "Posts.id", ondelete="CASCADE"), primary_key=True)
     post = relationship("Post", back_populates="likes")
     user = relationship("User", back_populates="likes")
+
+
+# Column Properties
+Post.likes_count = column_property(select(func.count(Like.user_id)).
+                                   where(Like.post_id == Post.id).
+                                   scalar_subquery())

@@ -34,6 +34,8 @@ Chitros has all the basic social media features such as -
 - Following-Followers relationships
 - Sending and receiving follow requests
 - Likes, comments and replies
+- Viewing feed sorted by likes and date of upload
+- Pagination of feed
 
 <br>
 

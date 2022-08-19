@@ -3,7 +3,7 @@
 # imports
 
 from datetime import datetime
-from typing import List
+from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, status, File, UploadFile
 from sqlalchemy import desc
 from sqlalchemy.orm import Session
@@ -21,15 +21,28 @@ router = APIRouter(tags=['Posts'])
 
 # Feed router
 @router.get("/feed", response_model=List[schemas.PostResponse])
-async def get_posts(db: Session = Depends(get_db),
+async def get_posts(page: Optional[int] = 1, sort: Optional[str] = None,
+                    db: Session = Depends(get_db),
                     current_user: models.User = Depends(get_current_user)) -> any:
 
     """ Displays users feed"""
 
-    posts = db.query(models.Post).\
+    post_query = db.query(models.Post).\
         join(models.User).\
-        filter(models.Post.author_id.in_([user.id for user in current_user.following+[current_user]]),
-               models.Post.published == True).order_by(desc(models.Post.created_at)).limit(20).all()
+        filter(models.Post.author_id.in_([user.id for user in
+                                          current_user.following +
+                                          [current_user]]),
+               models.Post.published == True)
+
+    if sort == "likes":
+        post_query = post_query.order_by(
+            desc(models.Post.likes_count))
+    else:
+        post_query = post_query.order_by(models.Post.created_at.desc())
+
+    start = 10*(page-1)
+    stop = start+10
+    posts = post_query.slice(start, stop).all()
 
     return posts
 
