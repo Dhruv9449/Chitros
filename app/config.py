@@ -10,7 +10,7 @@ load_dotenv()
 
 class AppSettings(BaseSettings):
     """ App Settings schema """
-    title: str = "Chitron"
+    title: str = "Chitros"
     description: str = "Social media backend API made using FastAPI"
     version: str = "0.0.1"
 
