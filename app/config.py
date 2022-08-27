@@ -1,7 +1,7 @@
 """ Loading and validation of all environment variables and secrets """
 
 # Imports
-from pydantic import BaseSettings
+from pydantic import BaseSettings, validator
 from dotenv import load_dotenv
 
 # Loading .env file
@@ -25,6 +25,13 @@ class Settings(BaseSettings):
     secret_key: str
     algorithm: str
     access_token_expire_minutes: int
+    cors_origin_whitelist: str
+
+    @validator('cors_origin_whitelist')
+    def split_cors_origin_string(cls, cors_origin_whitelist):
+        """ Convert cors_origin_whitelist string to list """
+
+        return cors_origin_whitelist.split(',')
 
     class Config:
         """ Link env file name """

@@ -18,7 +18,7 @@ Developed with 💙️ by Dhruv Shah
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.config import app_settings
+from app.config import app_settings, settings
 from app.db import models
 from app.db.db_setup import engine
 from app.routers import post, user, follow, like, comment, auth, media
@@ -33,13 +33,7 @@ app = FastAPI(**app_settings.dict())
 
 
 # Allowed origins for CORS
-origins = [
-    "http://localhost:8080",
-    "http://localhost:3000",
-    "http://localhost:5500",
-    "http://127.0.0.1:5500"
-
-]
+origins = [] + settings.cors_origin_whitelist
 
 
 # Middlewares
