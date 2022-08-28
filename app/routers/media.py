@@ -12,7 +12,7 @@ from app.db.db_setup import get_db
 
 # Defining router
 
-router = APIRouter(prefix="/media")
+router = APIRouter(tags=["media"], prefix="/media")
 
 
 # Getting post images
