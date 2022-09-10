@@ -46,8 +46,14 @@ class User(Base):
     password = Column(String, nullable=False)
     description = Column(String, nullable=True)
     profile_pic = Column(String, nullable=True)
+    
+    # For postgres
     created_at = Column(TIMESTAMP(timezone=True),
                         nullable=False, server_default=text('now()'))
+    
+    # For sqlite3
+    # created_at = Column(TIMESTAMP(timezone=True), nullable=False, default=func.now())
+    
     following = relationship("User",
                              secondary=user_follow,
                              primaryjoin="User.id==user_follow.c.user_id",
@@ -86,10 +92,19 @@ class Post(Base):
     description = Column(String, nullable=True)
     published = Column(Boolean, nullable=False, server_default='TRUE')
     location = Column(String, nullable=True)
+    
+    # For postgres
     created_at = Column(TIMESTAMP(timezone=True),
                         nullable=False, server_default=text('now()'))
     modified_at = Column(TIMESTAMP(timezone=True),
                          nullable=False, server_default=text('now()'))
+    
+    # For sqlite3
+    # created_at = Column(TIMESTAMP(timezone=True),
+    #                     nullable=False, default=func.now())
+    # modified_at = Column(TIMESTAMP(timezone=True),
+    #                      nullable=False, default=func.now())
+    
     author_id = Column(Integer, ForeignKey("Users.id", ondelete="CASCADE"))
     author = relationship("User", back_populates="posts")
     likes = relationship("Like", back_populates="post")
@@ -110,8 +125,13 @@ class Comment(Base):
     post = relationship("Post", back_populates="comments")
     replies = relationship(
         "Comment", backref=backref("Comment", remote_side=[id]))
+    
+    # For postgres
     created_at = Column(TIMESTAMP(timezone=True),
                         nullable=False, server_default=text('now()'))
+    
+    # For sqlite3
+    # created_at = Column(TIMESTAMP(timezone=True), nullable=False, default=func.now())
 
 
 class Like(Base):

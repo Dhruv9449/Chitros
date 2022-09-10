@@ -14,11 +14,18 @@ DATABASE_PASSWORD = settings.database_password
 DATABASE_HOSTNAME = settings.database_hostname
 DATABASE_NAME = settings.database_name
 
-# Database connection URL
+# Database connection URL for Postgres
 SQLALCHEMY_DATABASE_URL = f"postgresql://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@{DATABASE_HOSTNAME}/{DATABASE_NAME}"
 
-# Database Engine
+# Database Engine for Postgres
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
+
+# Database connection URL for sqlite3
+# SQLALCHEMY_DATABASE_URL = "sqlite:///./Chitros.db"
+
+# Database Engine for sqlite3
+# engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
+
 
 # Creating Database session
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

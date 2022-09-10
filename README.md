@@ -20,6 +20,7 @@ Try it here - https://chitros.dhruvshah.ml/docs
 - [Using the API](#using-the-api)
   - [Interactive documentation](#interactive-documentation)
   - [Thunder Client](#thunder-client)
+  - [Frontend Integration](#frontend-integration)
 - [License](#license)
 
 <br>
@@ -116,16 +117,22 @@ pip install -r requirements.txt
 
 ### Configuring Environment Variables
 
-Configure your environment variables by creating a `.env` file as shown in `.env.example` in the `Chitros/app/` directory -
+Configure your environment variables by creating a `.env` file as shown in `.env.example` in the `Chitros/` directory -
 
+#### Database variables
 - `DATABASE_USERNAME` - PostgreSQL database username.
 - `DATABASE_SERVER` - PostgreSQL database server name.
 - `DATABASE_PASSWORD` - PostgreSQL database password.
 - `DATABASE_HOSTNAME` - PostgreSQL database host name.
 - `DATABASE_NAME` - PostgreSQL database name.
+
+### JWT authentication variables
 - `SECRET_KEY` - Secret SSH key encoding your JWTs.
 - `ALGORITHM` - Algorithm for encoding JWTs.
 - `ACCESS_TOKEN_EXPIRE_MINUTES` - The time after which a JWT should expire.
+
+### CORS variables
+- `CORS_ORIGIN_WHITELIST` - Whitelisted URLs from which the API can receive requests.
 
 Use `.env.example` for reference.
 
@@ -180,6 +187,16 @@ If you are using VS code then you can also try out the API using the [Thunder Cl
 
 - Install the extension and then you can import the **thunderclient environment** from `Chitros/thunderclient/thunder-environment_Chitros.json`.
 - After this you can import the **thunderclient requests collection** from `Chitros/thunderclient/thunder-collection_Chitros.json`.
+
+<br>
+<br>
+
+### Frontend Integration
+
+If you want to use this API and build a frontend for it, you might want to use the sqlite3 database instead of postgres, to do that comment out the code under `# For postgres` and uncomment the code under `# For sqlite3` in `Chitros/app/db/db_setup.py` and `Chitros/app/db/models.py`.
+
+You will also add the frontend URL in the `CORS_ORIGIN_WHITELIST` in the `.env` file.  
+For example, for react you would set `CORS_ORIGIN_WHITELIST=http://localhost:3000, http://localhost:3001`.
 
 <br>
 <br>
