@@ -8,4 +8,6 @@ app/media/posts/*
 app/media/profile_pictures/*
 !app/media/posts/.gitkeep
 !app/media/profile_pictures/.gitkeep
-.env
+.env/.local
+.env/.production
+Chitros.db

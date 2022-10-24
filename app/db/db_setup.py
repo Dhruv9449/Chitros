@@ -13,9 +13,10 @@ DATABASE_SERVER = settings.database_server
 DATABASE_PASSWORD = settings.database_password
 DATABASE_HOSTNAME = settings.database_hostname
 DATABASE_NAME = settings.database_name
+DATABASE_PORT = settings.database_port
 
 # Database connection URL for Postgres
-SQLALCHEMY_DATABASE_URL = f"postgresql://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@{DATABASE_HOSTNAME}/{DATABASE_NAME}"
+SQLALCHEMY_DATABASE_URL = f"postgresql://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@{DATABASE_HOSTNAME}:{DATABASE_PORT}/{DATABASE_NAME}"
 
 # Database Engine for Postgres
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
