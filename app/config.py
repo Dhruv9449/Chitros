@@ -5,7 +5,7 @@ from pydantic import BaseSettings, validator
 from dotenv import load_dotenv
 
 # Loading .env file
-load_dotenv()
+load_dotenv('local.env')
 
 
 class AppSettings(BaseSettings):
@@ -36,7 +36,7 @@ class Settings(BaseSettings):
 
     class Config:
         """ Link env file name """
-        env_file = ".env"
+        env_file = ".\local.env"
 
 
 app_settings = AppSettings()
