@@ -7,7 +7,7 @@ services:
     volumes:
       - ./:/user/src/app
     env_file:
-      - ./.env/.local
+      - ./.env/.production
     depends_on:
       - postgres
   
@@ -16,7 +16,7 @@ services:
     volumes:
       - postgres-db:/var/lib/postgresql/data
     env_file:
-      - ./.env/.local
+      - ./.env/.production
     ports:
       - 5432:5432
 volumes:
