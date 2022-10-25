@@ -10,4 +10,5 @@ app/media/profile_pictures/*
 !app/media/profile_pictures/.gitkeep
 .env/.local
 .env/.production
+local.env
 Chitros.db
