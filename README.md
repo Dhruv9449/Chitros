@@ -12,11 +12,15 @@ Try it here - https://chitros.dhruvshah.ml/docs
 - [Requirements](#requirements)
 - [Setting-up and Installation](#setting-up-and-installation)
   - [Cloning repository](#cloning-repository)
-  - [Setting up a virtual environment](#setting-up-virtual-environment)
-  - [Installing dependencies](#installing-dependencies)
   - [Configuring environment variables](#configuring-environment-variables)
-  - [Migrating changes to the database](#migrating-changes-to-the-database)
-  - [Running the server](#run-the-server)
+  - [Using Docker](#using-docker)
+    - [Running locally](#running-locally)
+    - [Deploying in production](#deploying-in-production)
+  - [Without using docker](#without-using-docker)
+    - [Setting up a virtual environment](#setting-up-virtual-environment)
+    - [Installing dependencies](#installing-dependencies)
+    - [Migrating changes to the database](#migrating-changes-to-the-database)
+    - [Running the server](#run-the-server)
 - [Using the API](#using-the-api)
   - [Interactive documentation](#interactive-documentation)
   - [Thunder Client](#thunder-client)
@@ -76,6 +80,74 @@ git clone https://github.com/Dhruv9449/Chitros.git
 <br>
 <br>
 
+### Configuring Environment Variables
+
+Configure your environment variables by creating a `.local`(if you want to run development server locally) and a `.production`(if you want to deploy in production) file as shown in `.example` in the `Chitros/.env/` directory for docker.  
+
+For running it without docker, create a `local.env` file in the `Chitros/` directory.
+
+#### Database variables
+- `DATABASE_USERNAME` - Database username.
+- `DATABASE_SERVER` - Database server name.
+- `DATABASE_PASSWORD` - Database password.
+- `DATABASE_HOSTNAME` - Database host name.
+- `DATABASE_NAME` - Database name.
+- `DATABASE_PORT` - Database port(Usually 5432).  
+
+
+#### Postgres database variables(for docker)
+- `POSTGRES_USER` - Postgres database username.
+- `POSTGRES_PASSWORD` - Postgres database password.
+- `POSTGRES_DB` - Postgres database name.
+- `POSTGRES_HOST` - Postgres database host name.
+- `POSTGRES_SERVER` - Postgres database server name.
+- `POSTGRES_PORT` - Postgres database port(Usually 5432).
+
+
+#### JWT authentication variables
+- `SECRET_KEY` - Secret SSH key encoding your JWTs.
+- `ALGORITHM` - Algorithm for encoding JWTs.
+- `ACCESS_TOKEN_EXPIRE_MINUTES` - The time after which a JWT should expire.
+
+
+#### CORS variables
+- `CORS_ORIGIN_WHITELIST` - Whitelisted URLs from which the API can receive requests.
+
+Use `.env.example` for reference.
+
+<br>
+<br>
+
+## Using Docker
+
+### Running locally
+
+To run the server locally to view changes using hot reload, use the command - 
+
+```sh
+docker compose -f docker-compose-dev.yml up --build
+```
+
+This should start a local development server at `0.0.0.0:8000`
+
+<br>
+<br>
+
+### Deploying in production
+
+To deploy the server in production, use the following command - 
+
+```sh
+docker compose up --build
+```
+
+This should start production server, listening to requests at `0.0.0.0:80`
+
+<br>
+<br>
+
+## Without using Docker
+
 ### Setting up Virtual Environment
 
 Install `virtualenv` and set up a virtual environment in the working directory using the following commands -
@@ -115,29 +187,6 @@ pip install -r requirements.txt
 <br>
 <br>
 
-### Configuring Environment Variables
-
-Configure your environment variables by creating a `.env` file as shown in `.env.example` in the `Chitros/` directory -
-
-#### Database variables
-- `DATABASE_USERNAME` - PostgreSQL database username.
-- `DATABASE_SERVER` - PostgreSQL database server name.
-- `DATABASE_PASSWORD` - PostgreSQL database password.
-- `DATABASE_HOSTNAME` - PostgreSQL database host name.
-- `DATABASE_NAME` - PostgreSQL database name.
-
-### JWT authentication variables
-- `SECRET_KEY` - Secret SSH key encoding your JWTs.
-- `ALGORITHM` - Algorithm for encoding JWTs.
-- `ACCESS_TOKEN_EXPIRE_MINUTES` - The time after which a JWT should expire.
-
-### CORS variables
-- `CORS_ORIGIN_WHITELIST` - Whitelisted URLs from which the API can receive requests.
-
-Use `.env.example` for reference.
-
-<br>
-<br>
 
 ### Migrating changes to the database
 
@@ -195,7 +244,7 @@ If you are using VS code then you can also try out the API using the [Thunder Cl
 
 If you want to use this API and build a frontend for it, you might want to use the sqlite3 database instead of postgres, to do that comment out the code under `# For postgres` and uncomment the code under `# For sqlite3` in `Chitros/app/db/db_setup.py` and `Chitros/app/db/models.py`.
 
-You will also add the frontend URL in the `CORS_ORIGIN_WHITELIST` in the `.env` file.  
+You will also add the frontend URL in the `CORS_ORIGIN_WHITELIST` in the environment variables file.  
 For example, for react you would set `CORS_ORIGIN_WHITELIST=http://localhost:3000, http://localhost:3001`.
 
 <br>
