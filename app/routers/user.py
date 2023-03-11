@@ -22,11 +22,15 @@ router = APIRouter(prefix="/users",
 
 # User search
 @router.get("/", response_model=List[schemas.UserFollow])
-async def search_users(search: str,
+async def search_users(search: str = " ",
                        db: Session = Depends(get_db),
                        current_user: models.User = Depends(get_current_user)) -> any:
 
     """ Searches for users with similar username/name as the query """
+    
+    if search == " ":
+      users = db.query(models.User).all()
+      return users
 
     search_query = f"%{search}%"
     users = db.query(models.User).filter(or_(models.User.username.ilike(search_query),
