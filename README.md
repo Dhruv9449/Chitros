@@ -33,14 +33,14 @@ Try it here - https://chitros.dhruvshah.ml/docs
 
 Chitros has all the basic social media features such as -
 
-- Creating, modifying and deleting user profiles
-- Authentication using JWT access tokens
-- Creating, modifying and deleting posts
-- Following-Followers relationships
-- Sending and receiving follow requests
-- Likes, comments and replies
-- Viewing feed sorted by likes and date of upload
-- Pagination of feed
+- [x] Creating, modifying and deleting user profiles
+- [x] Authentication using JWT access tokens
+- [x] Creating, modifying and deleting posts
+- [x] Following-Followers relationships
+- [x] Sending and receiving follow requests
+- [x] Likes, comments and replies
+- [x] Viewing feed sorted by likes and date of upload
+- [x] Pagination of feed
 
 <br>
 
