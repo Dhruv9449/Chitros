@@ -1,7 +1,17 @@
-# Chitros
+<p align="center">
+<a href="https://github.com/Dhruv9449">
+<img src="https://github.com/user-attachments/assets/41b4f365-e313-4c24-b45d-8f47083877ed" width=100>
+</a>
+<h1 align="center"> Chitros </h1>
 
-Social media backend API built on FastAPI  
+<h4 align="center"> Social media backend API built on FastAPI  </h4>
+
+</p>
+
+<br>
+
 Try it here - https://chitros.dhruvshah.ml/docs
+
 
 <br>
 
